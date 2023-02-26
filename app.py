@@ -7,10 +7,12 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from flask import url_for
+from flask import redirect
+from flask import abort
 from flask.json import jsonify
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.datasets import fashion_mnist 
+from tensorflow.keras.datasets import fashion_mnist
 import pandas as pd
 import tensorflow as tf
 
@@ -22,9 +24,13 @@ app = Flask(__name__)
 model = tf.keras.models.load_model('model_anime_1.h5', compile=False)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/form')
+def form():
+    return render_template('form.html')
 
-def index():
+
+@app.route('/verify', methods=['POST', 'GET'])
+def verify():
     if request.method == 'POST':
         Title = request.form['title']
         Genre = request.form['genre']
@@ -33,22 +39,21 @@ def index():
         Producer = request.form['producer']
         Studio = request.form['studio']
 
-        X = {'Title' : Title, 
-            'Genre' : Genre,
-            'Description' : Description,
-            'Anime_type' : Anime_type,
-            'Producer' : Producer,
-            'Studio' : Studio
-            }
-    X = pd.DataFrame.from_dict(X)   
-    # make the prediction
-    #prediction = model.predict(X)    
-    return f'X: {X}'
-    #return f'Title: {title}, Genre: {genre}, Description: {description}, Type: {anime_type}, Producer: {producer}, Studio: {studio}'
+        X = {'Title': Title,
+             'Genre': Genre,
+             'Description': Description,
+             'Anime_type': Anime_type,
+             'Producer': Producer,
+             'Studio': Studio
+             }
+
+        X = pd.DataFrame.from_dict(X)
+        return redirect(f"/result/{X}")
 
 
-    return render_template('index.html')
-
+@app.route('/result/<X>')
+def result(X):
+    return f"Your anime is: {X}"
 
 
 if __name__ == '__main__':
