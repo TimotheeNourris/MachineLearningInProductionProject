@@ -148,5 +148,10 @@ def submit():
     return render_template('result.html', title=title, genre=genre, synopsis=synopsis, type=type, producer=producer, studio=studio, rating=rating)
 
 
+@app.route('/metrics')
+def metrics():
+    return metrics.generate_latest()
+
+
 if __name__ == "__main__":
     app.run(debug=True)
