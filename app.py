@@ -12,7 +12,8 @@ app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 metrics.info('app_info', 'Application info', version='1.0.3')
 metrics.counter('http_requests_total', 'HTTP Requests total',
-                labels=['method', 'endpoint'])
+                labels={'method': lambda: request.method, 'endpoint': lambda: request.path})
+
 
 # Model ML ------------------------------------------------------------
 
