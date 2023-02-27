@@ -4,7 +4,8 @@ pipeline {
 	stage('Checkout') {
 	    steps {
 		bat "git checkout Aury"
-                bat "git push origin Aury"
+                bat "git fetch origin"
+		bat "git merge origin/Aury"
 	    }
 	}
         stage('Build part') {
