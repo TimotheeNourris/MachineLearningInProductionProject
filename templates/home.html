@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask App</title>
+</head>
+<body>
+    <h1>Entrez les informations du film</h1>
+    <form action="/submit" method="post">
+        <label for="title">Titre :</label><br>
+        <input type="text" id="title" name="title"><br>
+
+        <label for="genre">Genre :</label><br>
+        <input type="text" id="genre" name="genre"><br>
+
+        <label for="synopsis">Synopsis :</label><br>
+        <textarea id="synopsis" name="synopsis"></textarea><br>
+
+        <label for="type">Type :</label><br>
+        <input type="text" id="type" name="type"><br>
+
+        <label for="producer">Producteur :</label><br>
+        <input type="text" id="producer" name="producer"><br>
+
+        <label for="studio">Studio :</label><br>
+        <input type="text" id="studio" name="studio"><br><br>
+
+        <input type="submit" value="Soumettre">
+    </form>
+</body>
+</html>
