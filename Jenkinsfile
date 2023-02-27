@@ -25,7 +25,7 @@ pipeline {
                 bat 'docker build -t jenkinsdocker .'
                 bat 'docker run -d -p 5000:5000 jenkinsdocker'
                 bat 'docker login -u auryble -p dckr_pat_zJAgdboJZq0En6669fSf72QOZW0'
-                bat 'docker tag tp5_mlops auryble/pj_mlops_repo'
+                bat 'docker tag jenkinsdocker auryble/pj_mlops_repo'
                 bat 'docker push auryble/pj_mlops_repo'
             }
         }       
