@@ -5,7 +5,7 @@ pipeline {
 	    steps {
 		bat "git checkout Aury"
                 bat "git fetch origin"
-		bat "git merge origin/Aury"
+		
 	    }
 	}
         stage('Build part') {
@@ -22,6 +22,7 @@ pipeline {
         }
         stage('Deploy part') {
             steps {
+		bat "git merge origin/Aury"
                 bat 'docker build -t jenkinsdocker .'
                 bat 'docker run -d -p 5000:5000 jenkinsdocker'
                 bat 'docker login -u auryble -p dckr_pat_zJAgdboJZq0En6669fSf72QOZW0'
